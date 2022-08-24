@@ -5,7 +5,7 @@
    <div class="container" style="margin-top:30px">
     <table class="table table-hover table-bordered" id="example">
       <thead>
-        <tr align="center">
+        <tr>
           <th>ID</th>
           <th>FROM</th>
           <th>TO</th>
@@ -14,14 +14,14 @@
           <th>DELETE</th>
         </tr>
       </thead>
-      <tbody align="center">
+      <tbody>
         <tr v-for="pair in pairs" :key="pair.id">
           <td>{{pair.id}}</td>
           <td>{{pair.from.code}}</td>
           <td>{{pair.to.code}}</td>
           <td>{{pair.conversion}}</td>
-          <td><button type="button" class="btn btn-primary">Modifier</button></td>
-          <td><button type="button" class="btn btn-danger">Supprimer</button></td>
+          <td>OK</td>
+          <td>OK</td>
         </tr>
         
       </tbody>
