@@ -1,8 +1,16 @@
 <template>
   <div class="main-content">
-    <div class="container mt-7">
+    <div class="container">
+      
+        <div class="col-md-10">
+            
+            <router-link class="btn btn-primary float-right" to="/addCurrency">Ajouter une devise</router-link>
+            <router-link class="btn btn-primary float-right" to="#">Ajouter une paire</router-link>
+        </div>
+      
+      <br>
+
       <!-- Table -->
-      <h2 class="mb-5">Tables Example</h2>
       <div class="row">
         <div class="col">
           <div class="card bg-default shadow">
@@ -55,6 +63,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import axios from "axios";
 export default {
+  name:"Dashboard",
   mounted() {
     //API Call
     axios.get("http://127.0.0.1:8000/api/pairs").then((res) => {
