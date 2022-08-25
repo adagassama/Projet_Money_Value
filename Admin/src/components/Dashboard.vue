@@ -5,7 +5,7 @@
         <div class="col-md-10">
             
             <router-link class="btn btn-primary float-right" to="/addCurrency">Ajouter une devise</router-link>
-            <router-link class="btn btn-primary float-right" to="#">Ajouter une paire</router-link>
+            <router-link class="btn btn-primary float-right" to="/addPair">Ajouter une paire</router-link>
         </div>
       
       <br>
@@ -24,7 +24,7 @@
                 <thead class="thead-dark" align="center">
                   <tr>
                     <th>#</th>
-                    <th>PAIRES</th>
+                    <th>PAIRE DE DEVISE</th>
                     <th>RATE</th>
                     <th>UPDATE</th>
                     <th>DELETE</th>
