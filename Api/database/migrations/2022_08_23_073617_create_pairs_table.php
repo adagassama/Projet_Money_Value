@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('to_id')->references('id')->on('currencies');
             $table->decimal('conversion', 12, 6);
             $table->unique(['from_id', 'to_id']);
+            $table->integer('nbreRequest')->nullable();
             $table->timestamps();
         });
     }
