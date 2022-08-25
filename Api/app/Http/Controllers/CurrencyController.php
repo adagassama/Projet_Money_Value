@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorecurrenciesRequest;
-use App\Http\Requests\UpdatecurrenciesRequest;
-use App\Models\currencies;
+use App\Models\currency;
+use Illuminate\Http\Request;
 
-class CurrenciesController extends Controller
+class CurrencyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,18 +22,32 @@ class CurrenciesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'name'      => ['required'],
+            'code  '  => ['required'],
+            'symbole'     => ['required'],
+        ]);
+
+        $curr = new currency();
+
+        $curr->name          = $request->name;
+        $curr->code      = $request->code;
+        $curr->symbol        = $request->symbole;
+
+        $curr->save();
+
+        return response()->json($curr);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorecurrenciesRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorecurrenciesRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +55,10 @@ class CurrenciesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\currencies  $currencies
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(currencies $currencies)
+    public function show($id)
     {
         //
     }
@@ -53,10 +66,10 @@ class CurrenciesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\currencies  $currencies
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(currencies $currencies)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +77,11 @@ class CurrenciesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatecurrenciesRequest  $request
-     * @param  \App\Models\currencies  $currencies
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatecurrenciesRequest $request, currencies $currencies)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +89,10 @@ class CurrenciesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\currencies  $currencies
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(currencies $currencies)
+    public function destroy($id)
     {
         //
     }
