@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CurrencyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PairsController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('currencies', CurrencyController::class);
 Route::apiResource('pairs', PairsController::class);
+
+Route::post('register', [AuthController::class,'register']);
+Route::post('login', [AuthController::class,'login']);
+Route::post('logout', [AuthController::class,'logout'])->middleware('auth:sanctum');
