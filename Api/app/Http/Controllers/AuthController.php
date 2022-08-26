@@ -23,7 +23,7 @@ class AuthController extends Controller
             'password'      => Hash::make($request->password),
         ]);
 
-        return response()->json(['msg' => 'Registered Successfully']);
+        return response()->json(['msg' => 'Enregistré avec succès !']);
     }
 
     public function login(Request $request)
@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
+                'email' => ['Email incorrect.'],
             ]);
         }
 

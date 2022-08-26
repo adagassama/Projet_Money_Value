@@ -10,12 +10,12 @@
                             <input type="text" class="form-control" name="name" v-model="formData.name">
                         </div>
                         <div class="form-group">
-                            <label for="position">Code</label>
+                            <label for="code">Code</label>
                             <input type="text" class="form-control" name="code" v-model="formData.code">
                         </div>
                         <div class="form-group">
-                            <label for="email">Symbole</label>
-                            <input type="text" class="form-control" name="symbole" v-model="formData.symbole">
+                            <label for="symbol">Symbol</label>
+                            <input type="text" class="form-control" name="symbol" v-model="formData.symbol">
                         </div>
                         <br>
                         <div class="form-group">
@@ -38,16 +38,16 @@ export default {
             formData: {
                 name: '',
                 code: '',
-                symbole: '',
+                symbol: '',
             }
         }
     },
     methods: {
         create() {
-            axios.post('http://127.0.0.1:8000/api/create', this.formData).then((response) => {
+            axios.post('http://127.0.0.1:8000/api/currencies', this.formData).then((response) => {
                 console.log('Devise ajoutée avec succès!')
                 this.$router.push('/admin')
-                this.$toaster.success('Devise ajoutée avec succès!')
+                this.$toast.success('Devise ajoutée avec succès!')
             }).catch((error) => {
                 console.log(error)
             });
