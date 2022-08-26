@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PairResource extends JsonResource
 {
+
     /**
      * Transform the resource into an array.
      *
