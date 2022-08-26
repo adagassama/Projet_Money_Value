@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class currency extends Model
 {
     use HasFactory;
-    protected $fillable = ['code', 'name'];
+    protected $fillable = ['name', 'code', 'symbol'];
 
     public function fromPairs()
     {

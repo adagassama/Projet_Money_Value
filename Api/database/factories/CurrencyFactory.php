@@ -14,8 +14,8 @@ class CurrencyFactory extends Factory
     {
 
         return [
-            'code' => $this->faker->currency_code,
             'name' => $this->faker->currency,
+            'code' => $this->faker->currency_code,
             'symbol' => $this->faker->unique()->randomLetter
         ];
     }

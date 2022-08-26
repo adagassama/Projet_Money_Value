@@ -1,57 +1,12 @@
-<template>
-  
-    <h1>Vue 3 Crud</h1>
-    
-   <div class="container" style="margin-top:30px">
-    <table class="table table-hover table-bordered" id="example">
-      <thead>
-        <tr align="center">
-          <th>ID</th>
-          <th>FROM</th>
-          <th>TO</th>
-          <th>RATE</th>
-          <th>UPDATE</th>
-          <th>DELETE</th>
-        </tr>
-      </thead>
-      <tbody align="center">
-        <tr v-for="pair in pairs" :key="pair.id">
-          <td>{{pair.id}}</td>
-          <td>{{pair.from.code}}</td>
-          <td>{{pair.to.code}}</td>
-          <td>{{pair.conversion}}</td>
-          <td><button type="button" class="btn btn-primary">Modifier</button></td>
-          <td><button type="button" class="btn btn-danger">Supprimer</button></td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </div>
- 
-</template>
-<script>
-//Bootstrap and jQuery libraries
-//import "bootstrap/dist/css/bootstrap.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootstrap-vue/dist/bootstrap-vue.css";
-import axios from 'axios';
-export default {
- 
-  mounted(){
-    //API Call
-    axios
-    .get("http://127.0.0.1:8000/api/pairs")
-    .then((res)=>
-    {
-      this.pairs = res.data.data;
-      console.log(this.pairs)
-     
-    })
-  },
-  data: function() {
-        return {
-            pairs:[]
-        }
-    },
-}
+<script setup>
+import { RouterLink, RouterView } from "vue-router";
+import Header from "./components/Header.vue";
+
 </script>
+
+<template>
+  <RouterView />
+</template>
+
+<style>
+</style>

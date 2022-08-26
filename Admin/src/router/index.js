@@ -4,6 +4,7 @@ import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import AddCurrencyView from "../views/AddCurrencyView.vue";
 import AddPairView from "../views/AddPairView.vue";
+import UpdatePairView from "../views/UpdatePairView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -31,6 +32,12 @@ const router = createRouter({
       path: '/addPair',
       name: 'addPair',
       component: AddPairView
+    },
+    {
+      path: '/updatePair/:id',
+      name: 'updatePair',
+      props: true,
+      component: UpdatePairView
     }
   ]
 })

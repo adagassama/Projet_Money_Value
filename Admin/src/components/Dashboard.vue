@@ -31,17 +31,15 @@
                   </tr>
                 </thead>
                 <tbody align="center">
-                  <tr v-for="pair in pairs" :key="pair.id">
-                    <td>{{ pair.id }}</td>
+                  <tr v-for="(pair, index) in pairs" :key="pair.id">
+                    <td>{{ index+1 }}</td>
                     <td>{{ pair.from.code }} - {{ pair.to.code }}</td>
                     <td>{{ pair.conversion }}</td>
                     <td>
-                      <button type="button" class="btn btn-primary">
-                        Modifier
-                      </button>
+                      <router-link :to="{ name: 'updatePair', params: { id: pair.id } }" class="btn btn-primary">Modifier</router-link>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-danger">
+                      <button type="button" class="btn btn-danger" @click.prevent="pairDelete(pair.id, index)">
                         Supprimer
                       </button>
                     </td>
@@ -70,6 +68,20 @@ export default {
       this.pairs = res.data.data;
       console.log(this.pairs);
     });
+  },
+  methods: {
+    pairDelete(id, index) {
+      axios.delete(`http://127.0.0.1:8000/api/pairs/${id}`)
+        .then((response) => {
+          console.log(response);
+          console.log("Supprimé avec succès");
+          this.$toast.success('Supprimé avec succè!')
+          pairs.values.splice(index, 1);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    },
   },
   data: function () {
     return {
