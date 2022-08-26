@@ -1,7 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-custom navbar-mainbg">
-		<img class="logo" :src="logo" />
-        <a class="navbar-brand navbar-logo" href="#">Money Value</a>
+        <a class="navbar-brand navbar-logo" href="#"><img class="logo" :src="logo" /></a>
         <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars text-white"></i>
         </button>
@@ -20,6 +19,7 @@
             </ul>
         </div>
     </nav>
+
 </template>
 
 <script>
@@ -28,8 +28,6 @@ import logo from "../assets/logo.png"
         data() {
             return {
 				logo:logo,
-                employees: {},
-                currentUser: {},
                 token: localStorage.getItem('token')
             }
         },
@@ -43,14 +41,13 @@ import logo from "../assets/logo.png"
                 })
             }
         },
-        mounted() {
-            window.axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
-            axios.get('http://127.0.0.1:8000/api/user').then((response) => {
-                this.currentUser = response.data
-            }).catch((errors) => {
-                console.log(errors)
-            })
-        }
+        // mounted() {
+        //     axios.get('http://127.0.0.1:8000/api/user').then((response) => {
+        //         this.currentUser = response.data
+        //     }).catch((errors) => {
+        //         console.log(errors)
+        //     })
+        // }
     }
 </script>
 
