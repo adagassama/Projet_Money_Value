@@ -17,47 +17,69 @@ class PairsController extends Controller
     {
         $codeFrom = Currency::where('code', $curr1)->first();
         $codeTo = Currency::where('code', $curr2)->first();
-        $pair = Pairs::with('from', 'to')
-            ->where('from_id', $codeFrom->id)
-            ->where('to_id', $codeTo->id)->first()
-        ;
-        //dd($pair);
 
-        if ($invert == true) {
-            $converted = $amount * 1/$pair->rates;
-            $req = $pair->nbreRequest + 1;
-            DB::table('pairs')
-                ->where('id', $pair->id)
-                ->update(['nbreRequest' => $req]);
-
-            $data = [
-                'amount_currecy_from'   => $amount,
-                'from'                  => $curr1,
-                'amount_currency_to'    => $converted,
-                'to'                    => $curr2,
-                'Requête'              => $req
-            ];
-        } else {
-            $converted = $amount * $pair->rates;
-            $req = $pair->nbreRequest + 1;
-            DB::table('pairs')
-                ->where('id', $pair->id)
-                ->update(['nbreRequest' => $req]);
-
-            $data = [
-                'amount_currency_from' => $amount,
-                'from'                 => $curr1,
-                'amount_currency_to'   => $converted,
-                'to'                   => $curr2,
-                'Requête'              => $req,
-            ];
-
+        if(isset($codeFrom)){
+            if(isset($codeTo)){
+                $pair = Pairs::with('from', 'to')
+                    ->where('from_id', $codeFrom->id)
+                    ->where('to_id', $codeTo->id)->first();
+            }
+            else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Devise 2 non trouvée'
+                ], 404);
+            }
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Devise 1 non trouvée'
+            ], 404);
         }
 
-        return response()->json([
-            'status' => true,
-            'convert'=> $data,
-        ]);
+        if($pair) {
+            if ($invert == 'true') {
+                $converted = $amount * (1/$pair->rates);
+                $req = $pair->nbreRequest + 1;
+                DB::table('pairs')
+                    ->where('id', $pair->id)
+                    ->update(['nbreRequest' => $req]);
+
+                $data = [
+                    'amount_currecy_from'   => $amount,
+                    'from'                  => $curr1,
+                    'amount_currency_to'    => $converted,
+                    'to'                    => $curr2,
+                    'Requête'              => $req
+                ];
+            } else {
+                $converted = $amount * $pair->rates;
+                $req = $pair->nbreRequest + 1;
+                DB::table('pairs')
+                    ->where('id', $pair->id)
+                    ->update(['nbreRequest' => $req]);
+
+                $data = [
+                    'amount_currency_from' => $amount,
+                    'from'                 => $curr1,
+                    'amount_currency_to'   => $converted,
+                    'to'                   => $curr2,
+                    'Requête'              => $req,
+                ];
+
+            }
+            return response()->json([
+                'status' => true,
+                'convert'=> $data,
+            ]);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Conversion impossible paire non trouvée'
+            ], 404);
+        }
     }
 
     /**
@@ -97,13 +119,12 @@ class PairsController extends Controller
             'from_id'       => ['required'],
             'to_id'         => ['required'],
             'rates'         => ['required'],
-            'nbreRequest'   => ['nullable']
         ]);
         $newPair = Pairs::create([
             'from_id'       => $request->from_id,
             'to_id'         => $request->to_id,
             'rates'         => $request->rates,
-            'nbreRequest'   => $request->nbreRequest
+            'nbreRequest'   => 0
         ]);
 
         return response()->json([
@@ -172,8 +193,9 @@ class PairsController extends Controller
      * @param  \App\Models\Pairs  $pairs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pairs $pairs)
+    public function destroy($id)
     {
+        $pairs = Pairs::find($id);
         if ($pairs) {
             $pairs->delete();
             return response()->json([
