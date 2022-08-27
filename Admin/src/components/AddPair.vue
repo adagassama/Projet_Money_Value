@@ -27,8 +27,8 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="conversion">Taux de conversion</label>
-                            <input type="number" class="form-control" name="conversion" v-model="formData.conversion">
+                            <label for="rates">Taux de conversion</label>
+                            <input type="number" class="form-control" name="rates" v-model="formData.rates">
                         </div>
                         <br>
                         <div class="form-group">
@@ -51,7 +51,7 @@ export default {
             formData: {
                 from_id: '',
                 to_id: '',
-                conversion: '',
+                rates: '',
             },
             currencies: []
         }

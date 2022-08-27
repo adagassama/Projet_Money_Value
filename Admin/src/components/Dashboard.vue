@@ -34,7 +34,7 @@
                   <tr v-for="(pair, index) in pairs" :key="pair.id">
                     <td>{{ index+1 }}</td>
                     <td>{{ pair.from.code }} - {{ pair.to.code }}</td>
-                    <td>{{ pair.conversion }}</td>
+                    <td>{{ pair.rates }}</td>
                     <td>
                       <router-link :to="{ name: 'updatePair', params: { id: pair.id } }" class="btn btn-primary">Modifier</router-link>
                     </td>

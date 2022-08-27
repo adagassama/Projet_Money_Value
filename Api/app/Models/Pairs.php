@@ -10,7 +10,7 @@ class pairs extends Model
     use HasFactory;
 
     protected $dates = ['date'];
-    protected $fillable = ['from_id', 'to_id', 'conversion'];
+    protected $fillable = ['from_id', 'to_id', 'rates'];
 
     public function from()
     {

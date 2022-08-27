@@ -22,7 +22,7 @@ class PairsController extends Controller
         ;
 
         if ($invert == true) {
-            $converted = $amount * 1/$pair->conversion;
+            $converted = $amount * 1/$pair->rates;
             $req = $pair->nbreRequest + 1;
             $pair->update([
                 'nbreRequest' => $req
@@ -92,12 +92,12 @@ class PairsController extends Controller
         $request->validate([
             'from_id'      => ['required'],
             'to_id'  => ['required'],
-            'conversion'     => ['required']
+            'rates'     => ['required']
         ]);
         $newPair = Pairs::create([
             'from_id' => $request->from_id,
             'to_id' => $request->to_id,
-            'conversion' => $request->conversion
+            'rates' => $request->rates
         ]);
 
         return response()->json([
@@ -142,14 +142,14 @@ class PairsController extends Controller
         $request->validate([
             'from_id'      => ['required'],
             'to_id'  => ['required'],
-            'conversion'     => ['required']
+            'rates'     => ['required']
         ]);
         $pair = Pairs::find($id);
 
         $pair->update([
             'from_id' => $request->from_id,
             'to_id' => $request->to_id,
-            'conversion' => $request->conversion
+            'rates' => $request->rates
         ]);
 
         return response()->json([

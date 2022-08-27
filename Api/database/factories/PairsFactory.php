@@ -16,7 +16,7 @@ class PairsFactory extends Factory
         return [
             'from_id' => rand(1, 20),
             'to_id' => rand(1, 20),
-            'conversion' => $this->faker->randomFloat(4, 0.0001, 10.0000),
+            'rates' => $this->faker->randomFloat(4, 0.0001, 10.0000),
             'nbreRequest' => 0
         ];
     }

@@ -16,8 +16,8 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="conversion">Taux de conversion</label>
-                            <input type="number" class="form-control" name="conversion" v-model="pair.conversion" >
+                            <label for="rates">Taux de conversion</label>
+                            <input type="number" class="form-control" name="rates" v-model="pair.rates" >
                         </div>
                         <br>
                         <div class="form-group">
@@ -39,7 +39,7 @@ export default {
     const pair = reactive({
       from_id: '',
       to_id: '',
-      conversion:'',
+      rates:'',
     });
     const validation = ref([]);
     const router = useRouter();
@@ -52,7 +52,7 @@ export default {
             console.log(response);
           pair.from_id = response.data.data.from_id;
           pair.to_id = response.data.data.to_id;
-          pair.conversion = response.data.data.conversion;
+          pair.rates = response.data.data.rates;
         })
         .catch((error) => {
           console.log(error.response.data);
@@ -61,13 +61,13 @@ export default {
     function submit() {
         let from_id = pair.from_id;
         let to_id = pair.to_id;
-        let conversion = pair.conversion;
+        let rates = pair.rates;
 
         axios
             .put(`http://localhost:8000/api/pairs/${route.params.id}`, {
             from_id: from_id,
             to_id: to_id,
-            conversion: conversion
+            rates: rates
             })
             .then((response) => {
                 console.log(response);
