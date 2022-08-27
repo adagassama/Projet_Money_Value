@@ -1,13 +1,11 @@
 <template>
   <div class="main-content">
     <div class="container">
-      
-        <div class="col-md-10">
-            
+        <div class="col-md tae">
             <router-link class="btn btn-primary float-right" to="/addCurrency">Ajouter une devise</router-link>
             <router-link class="btn btn-primary float-right" to="/addPair">Ajouter une paire</router-link>
-        </div>
-      
+            <button class="btn btn-danger pull-right" @click.prevent="logout">Déconnexion</button>
+        </div>  
       <br>
 
       <!-- Table -->
@@ -26,6 +24,7 @@
                     <th>#</th>
                     <th>PAIRE DE DEVISE</th>
                     <th>RATE</th>
+                    <th>Nbre Conversion</th>
                     <th>UPDATE</th>
                     <th>DELETE</th>
                   </tr>
@@ -35,6 +34,7 @@
                     <td>{{ index+1 }}</td>
                     <td>{{ pair.from.code }} - {{ pair.to.code }}</td>
                     <td>{{ pair.rates }}</td>
+                    <td>{{ pair.nbreRequest }}</td>
                     <td>
                       <router-link :to="{ name: 'updatePair', params: { id: pair.id } }" class="btn btn-primary">Modifier</router-link>
                     </td>
@@ -63,6 +63,7 @@ import axios from "axios";
 export default {
   name:"Dashboard",
   mounted() {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
     //API Call
     axios.get("http://127.0.0.1:8000/api/pairs").then((res) => {
       this.pairs = res.data.data;
@@ -75,6 +76,7 @@ export default {
         .then((response) => {
           console.log(response);
           console.log("Supprimé avec succès");
+          this.$router.go()
           this.$toast.success('Supprimé avec succè!')
           pairs.values.splice(index, 1);
         })
@@ -82,10 +84,20 @@ export default {
           console.log(error.response);
         });
     },
+    logout(){
+        axios.post('http://127.0.0.1:8000/api/logout').then((response) => {
+            localStorage.removeItem('token')
+            this.$router.push('/login')
+            this.$toast.success('Vous êtes déconnecté!')
+        }).catch((errors) => {
+            console.log(errors)
+        })
+    }
   },
   data: function () {
     return {
       pairs: [],
+      token: localStorage.getItem('token')
     };
   },
 };
@@ -138,6 +150,10 @@ export default {
 
 @-ms-viewport {
   width: device-width;
+}
+
+.tae{
+  text-align: center;
 }
 
 figcaption,

@@ -12,9 +12,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/login"><i class="far fa-address-book"></i>LOGIN</a>
                 </li>
-				<li class="nav-item active">
-                    <a class="nav-link" href="logout"><i class="far fa-address-book"></i>LOGOUT</a>
-                </li>
                 
             </ul>
         </div>
@@ -30,24 +27,7 @@ import logo from "../assets/logo.png"
 				logo:logo,
                 token: localStorage.getItem('token')
             }
-        },
-        methods: {
-            logout(){
-                axios.post('http://127.0.0.1:8000/api/logout').then((response) => {
-                    localStorage.removeItem('token')
-                    this.$router.push('/login')
-                }).catch((errors) => {
-                    console.log(errors)
-                })
-            }
-        },
-        // mounted() {
-        //     axios.get('http://127.0.0.1:8000/api/user').then((response) => {
-        //         this.currentUser = response.data
-        //     }).catch((errors) => {
-        //         console.log(errors)
-        //     })
-        // }
+        }
     }
 </script>
 

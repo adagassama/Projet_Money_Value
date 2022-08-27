@@ -51,7 +51,7 @@ export default {
             formData: {
                 from_id: '',
                 to_id: '',
-                rates: '',
+                rates: ''
             },
             currencies: []
         }
