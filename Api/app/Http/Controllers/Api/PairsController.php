@@ -8,6 +8,7 @@ use App\Models\currency;
 use App\Models\Pairs;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class PairsController extends Controller
 {
@@ -20,32 +21,35 @@ class PairsController extends Controller
             ->where('from_id', $codeFrom->id)
             ->where('to_id', $codeTo->id)->first()
         ;
+        //dd($pair);
 
         if ($invert == true) {
             $converted = $amount * 1/$pair->rates;
             $req = $pair->nbreRequest + 1;
-            $pair->update([
-                'nbreRequest' => $req
-            ]);
+            DB::table('pairs')
+                ->where('id', $pair->id)
+                ->update(['nbreRequest' => $req]);
 
             $data = [
                 'amount_currecy_from'   => $amount,
                 'from'                  => $curr1,
                 'amount_currency_to'    => $converted,
-                'to'                    => $curr2
+                'to'                    => $curr2,
+                'Requête'              => $req
             ];
         } else {
             $converted = $amount * $pair->rates;
             $req = $pair->nbreRequest + 1;
-            $pair->update([
-                'nbreRequest' => $req
-            ]);
+            DB::table('pairs')
+                ->where('id', $pair->id)
+                ->update(['nbreRequest' => $req]);
 
             $data = [
                 'amount_currency_from' => $amount,
                 'from'                 => $curr1,
                 'amount_currency_to'   => $converted,
                 'to'                   => $curr2,
+                'Requête'              => $req,
             ];
 
         }
@@ -90,14 +94,16 @@ class PairsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'from_id'      => ['required'],
-            'to_id'  => ['required'],
-            'rates'     => ['required']
+            'from_id'       => ['required'],
+            'to_id'         => ['required'],
+            'rates'         => ['required'],
+            'nbreRequest'   => ['nullable']
         ]);
         $newPair = Pairs::create([
-            'from_id' => $request->from_id,
-            'to_id' => $request->to_id,
-            'rates' => $request->rates
+            'from_id'       => $request->from_id,
+            'to_id'         => $request->to_id,
+            'rates'         => $request->rates,
+            'nbreRequest'   => $request->nbreRequest
         ]);
 
         return response()->json([
