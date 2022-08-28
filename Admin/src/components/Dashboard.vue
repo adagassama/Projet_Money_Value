@@ -69,12 +69,13 @@ export default {
     axios.get("http://127.0.0.1:8000/api/user").then(response => {
       this.user = response.data;
     });
-    //API Call
+    // Appel API pour récupérer toutes les paires au chargement de la page
     axios.get("http://127.0.0.1:8000/api/pairs").then((res) => {
       this.pairs = res.data.data;
     });
   },
   methods: {
+    // Suppression d'une paire de devise 
     pairDelete(id, index) {
       axios.delete(`http://127.0.0.1:8000/api/pairs/${id}`)
         .then((response) => {
@@ -86,6 +87,7 @@ export default {
           console.log(error.response);
         });
     },
+    // Gestion de la Déconnexion en utilisant l'API
     logout(){
         axios.post('http://127.0.0.1:8000/api/logout').then((response) => {
             localStorage.removeItem('token')

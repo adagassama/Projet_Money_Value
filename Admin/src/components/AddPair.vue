@@ -57,6 +57,7 @@ export default {
         }
     },
     methods: {
+        // Ajout d'une nouvelle paire en fonction des devises existantes 
         createPair() {
             axios.post('http://127.0.0.1:8000/api/pairs', this.formData).then((response) => {
                 this.$router.push('/admin')
@@ -67,7 +68,7 @@ export default {
         }
     },
     mounted() {
-        //API Call
+        // Appel API pour récupérer toutes les devises
         axios.get("http://127.0.0.1:8000/api/currencies").then((res) => {
         this.currencies = res.data.data;
     });

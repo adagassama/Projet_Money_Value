@@ -43,6 +43,7 @@ export default {
         }
     },
     methods: {
+        // Ajout d'une nouvelle devise
         create() {
             axios.post('http://127.0.0.1:8000/api/currencies', this.formData).then((response) => {
                 this.$router.push('/admin')

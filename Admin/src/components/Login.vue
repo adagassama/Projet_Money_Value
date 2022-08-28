@@ -46,6 +46,7 @@ import axios from "axios";
             }
         },
         methods: {
+            // Gestion de la connexion en utilisant l'API
             login(){
                 axios.post('http://127.0.0.1:8000/api/login', this.formData).then((response) => {
                     localStorage.setItem('token', response.data.token)
