@@ -1,5 +1,6 @@
 <template>
   <div class="main-content">
+    <h2>BIENVENUE, {{ user.name }} DANS VOTRE DASHBOARD</h2>
     <div class="container">
         <div class="col-md tae">
             <router-link class="btn btn-primary float-right" to="/addCurrency">Ajouter une devise</router-link>
@@ -59,11 +60,17 @@
 //import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import logo from "../assets/logo.png"
 import axios from "axios";
+window.axios = axios;
 export default {
   name:"Dashboard",
   mounted() {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+    window.axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+    axios.get("http://127.0.0.1:8000/api/user").then(response => {
+      this.user = response.data;
+      console.log(this.user)
+    });
     //API Call
     axios.get("http://127.0.0.1:8000/api/pairs").then((res) => {
       this.pairs = res.data.data;
@@ -86,8 +93,9 @@ export default {
     },
     logout(){
         axios.post('http://127.0.0.1:8000/api/logout').then((response) => {
+            console.log(response)
             localStorage.removeItem('token')
-            this.$router.push('/login')
+            this.$router.push('/')
             this.$toast.success('Vous êtes déconnecté!')
         }).catch((errors) => {
             console.log(errors)
@@ -96,6 +104,8 @@ export default {
   },
   data: function () {
     return {
+      logo:logo,
+      user: [],
       pairs: [],
       token: localStorage.getItem('token')
     };
@@ -162,6 +172,10 @@ main,
 nav,
 section {
   display: block;
+}
+.logo{
+	width: 150px;
+	height: 150px;
 }
 
 body {
@@ -1375,6 +1389,7 @@ a.btn-icon-only {
 
 .main-content {
   position: relative;
+  text-align: center;
 }
 
 .dropdown {

@@ -26,5 +26,5 @@ Route::apiResource('pairs', PairsController::class);
 Route::post('register', [AuthController::class,'register']);
 Route::post('login', [AuthController::class,'login']);
 Route::post('logout', [AuthController::class,'logout'])->middleware('auth:sanctum');
-
+Route::get('/conversion', [PairsController::class,'conversion']);
 Route::get('/convert/{from_id}/{to_id}/{amount}/{invert?}', [PairsController::class,'convert']);

@@ -48,7 +48,8 @@ import axios from "axios";
         methods: {
             login(){
                 axios.post('http://127.0.0.1:8000/api/login', this.formData).then((response) => {
-                    localStorage.setItem('token', response.data)
+                    console.log(response)
+                    localStorage.setItem('token', response.data.token)
                     this.$router.push('/admin')
                 }).catch((errors) => {
                     this.errors = errors.response.data.errors

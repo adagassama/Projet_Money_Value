@@ -9,10 +9,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin"><i class="fas fa-tachometer-alt"></i>DASHBOARD</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/login"><i class="far fa-address-book"></i>LOGIN</a>
-                </li>
-                
             </ul>
         </div>
     </nav>

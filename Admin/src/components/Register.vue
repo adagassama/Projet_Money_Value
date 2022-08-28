@@ -62,7 +62,7 @@ import axios from "axios";
                     console.log(response.data)
                     this.formData.name = this.formData.email = this.formData.password = this.formData.password_confirmation = ''
                     this.errors = {}
-                    this.$router.push('/login')
+                    this.$router.push('/')
                     this.$toast.success('Compte crée avec succès!')
                 }).catch((errors) => {
                     this.errors = errors.response.data.errors

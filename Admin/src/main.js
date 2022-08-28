@@ -1,12 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import LoginView from './views/LoginView.vue'
 import router from './router'
 import Toaster from '@meforma/vue-toaster';
 
-function loggedIn(){
-    return localStorage.getItem('token')
-}
 const app = createApp(App)
 
 app.use(router)

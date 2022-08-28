@@ -12,7 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class PairsController extends Controller
 {
-
+    public function conversion()
+    {
+        return response()->json([
+            'success' => true,
+            'message' => 'API fonctionnelle',
+            'status'    => 200
+        ], 200);
+    }
     public function convert($curr1, $curr2, $amount, $invert = false)
     {
         $codeFrom = Currency::where('code', $curr1)->first();
@@ -72,7 +79,7 @@ class PairsController extends Controller
             return response()->json([
                 'status' => true,
                 'convert'=> $data,
-            ]);
+            ], 200);
         }
         else{
             return response()->json([
@@ -92,7 +99,7 @@ class PairsController extends Controller
         $pairs = Pairs::with('from', 'to')->latest()->get();
         return response()->json([
             'success' => true,
-            'message' => 'List data post',
+            'message' => 'List data pairs',
             'data' => $pairs
         ], 200);
     }

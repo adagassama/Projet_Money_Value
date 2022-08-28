@@ -42,7 +42,10 @@ class AuthController extends Controller
             ]);
         }
 
-        return $user->createToken($request->device_name)->plainTextToken;
+        return response()->json([
+            'status'=>'done',
+            'msg'   => 'Authentification avec succès  !',
+            'token' => $user->createToken($request->device_name)->plainTextToken]);
     }
 
     public function logout(Request $request)
