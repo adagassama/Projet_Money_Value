@@ -7,7 +7,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin"><i class="fas fa-tachometer-alt"></i>DASHBOARD</a>
+                    
+					<router-link class="btn btn-primary float-right" to="/admin">DASHBOARD</router-link>
                 </li>
             </ul>
         </div>
@@ -68,7 +69,7 @@ i {
 	float: left;
 }
 #navbarSupportedContent ul li a{
-	color: rgba(255,255,255,0.5);
+	color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
     font-size: 15px;
     display: block;

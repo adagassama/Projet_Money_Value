@@ -11,7 +11,7 @@ Le MCD est situé à la racine du projet sous format png (modele.png)
 
 ### Procédure à suivre pour installer le projet en local :
 
-1. Créez une base de données vide (currencies-converter) sur votre serveur.
+1. Créez une base de données vide (currency-converter) sur votre serveur.
    
 2. Copiez le fichier .env.example et renommez-le en .env.
    
