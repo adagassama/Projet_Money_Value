@@ -59,7 +59,6 @@ export default {
     methods: {
         createPair() {
             axios.post('http://127.0.0.1:8000/api/pairs', this.formData).then((response) => {
-                console.log('Paire ajoutée avec succès!')
                 this.$router.push('/admin')
                 this.$toast.success('Paire ajoutée avec succès!')
             }).catch((error) => {
@@ -71,7 +70,6 @@ export default {
         //API Call
         axios.get("http://127.0.0.1:8000/api/currencies").then((res) => {
         this.currencies = res.data.data;
-        console.log(this.currencies);
     });
   }
 }

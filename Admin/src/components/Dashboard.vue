@@ -1,6 +1,5 @@
 <template>
   <div class="main-content">
-    <h2>BIENVENUE, {{ user.name }} DANS VOTRE DASHBOARD</h2>
     <div class="container">
         <div class="col-md tae">
             <router-link class="btn btn-primary float-right" to="/addCurrency">Ajouter une devise</router-link>
@@ -69,20 +68,16 @@ export default {
     window.axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
     axios.get("http://127.0.0.1:8000/api/user").then(response => {
       this.user = response.data;
-      console.log(this.user)
     });
     //API Call
     axios.get("http://127.0.0.1:8000/api/pairs").then((res) => {
       this.pairs = res.data.data;
-      console.log(this.pairs);
     });
   },
   methods: {
     pairDelete(id, index) {
       axios.delete(`http://127.0.0.1:8000/api/pairs/${id}`)
         .then((response) => {
-          console.log(response);
-          console.log("Supprimé avec succès");
           this.$router.go()
           this.$toast.success('Supprimé avec succè!')
           pairs.values.splice(index, 1);
@@ -93,7 +88,6 @@ export default {
     },
     logout(){
         axios.post('http://127.0.0.1:8000/api/logout').then((response) => {
-            console.log(response)
             localStorage.removeItem('token')
             this.$router.push('/')
             this.$toast.success('Vous êtes déconnecté!')

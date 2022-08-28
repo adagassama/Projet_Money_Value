@@ -59,7 +59,6 @@ import axios from "axios";
         methods: {
             registerUser(){
                 axios.post('http://127.0.0.1:8000/api/register', this.formData).then((response) => {
-                    console.log(response.data)
                     this.formData.name = this.formData.email = this.formData.password = this.formData.password_confirmation = ''
                     this.errors = {}
                     this.$router.push('/')

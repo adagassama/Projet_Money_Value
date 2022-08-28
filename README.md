@@ -11,20 +11,31 @@ Le MCD est situé à la racine du projet sous format png (modele.png)
 
 ### Procédure à suivre pour installer le projet en local :
 
+## Dans le 1er terminal:
+
 1. Créez une base de données vide (currency-converter) sur votre serveur.
    
-2. Copiez le fichier .env.example et renommez-le en .env.
+2. Se placer dans le dossier API 
+
+3. Copiez le fichier .env.example et renommez-le en .env.
    
-3. Saisissez la commande "composer install".
+4. Faire la connexion avec votre BD vide
 
-4. Tapez la commande "npm install".
+5. Saisissez la commande "composer install".
    
-5. Saisissez la commande "php artisan migrate:fresh --seed" pour lancer les migrations et seeders pour peupler votre base de données.
+6. Saisissez la commande "php artisan migrate:fresh --seed" pour lancer les migrations et seeders pour peupler votre base de données.
 
-6. Tapez la commande **php artisan serve** 
+7. Tapez la commande **php artisan serve** 
 
-7. Pour pouvoir accéder à l'interface d'administration, cliquez sur le bouton Connexion dans le menu.
+## Dans le 2ème terminal:
 
+8. Se placer dans le dossier ADMIN
+
+9. Tapez la commande "npm install".
+
+10. Tapez la commande **npm run dev** 
+
+11. Pour pouvoir accéder à l'interface d'administration, cliquez sur le bouton Connexion dans le menu.
 
 ####Email: philipe@gmail.com
 

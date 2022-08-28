@@ -49,7 +49,6 @@ export default {
       axios
         .get(`http://localhost:8000/api/pairs/${route.params.id}`)
         .then((response) => {
-            console.log(response);
           pair.from_id = response.data.data.from_id;
           pair.to_id = response.data.data.to_id;
           pair.rates = response.data.data.rates;
@@ -70,7 +69,6 @@ export default {
             rates: rates
             })
             .then((response) => {
-                console.log(response);
                 router.push({
                  name: 'admin',
                 });

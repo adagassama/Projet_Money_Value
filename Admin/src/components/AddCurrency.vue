@@ -45,7 +45,6 @@ export default {
     methods: {
         create() {
             axios.post('http://127.0.0.1:8000/api/currencies', this.formData).then((response) => {
-                console.log('Devise ajoutée avec succès!')
                 this.$router.push('/admin')
                 this.$toast.success('Devise ajoutée avec succès!')
             }).catch((error) => {
