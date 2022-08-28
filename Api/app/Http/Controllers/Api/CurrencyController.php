@@ -15,6 +15,7 @@ class CurrencyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Récupération de toutes les devises
     public function index():AnonymousResourceCollection
     {
         return CurrencyResource::collection(Currency::latest()->get());
@@ -36,6 +37,7 @@ class CurrencyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // Ajout d'une nouvelle devise
     public function store(Request $request)
     {
         $request->validate([

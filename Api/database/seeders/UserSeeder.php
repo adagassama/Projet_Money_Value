@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // Ajout de l'administrateur par défaut
         User::factory()->create([
             'name' => 'Philipe',
             'email' => 'philipe@gmail.com'

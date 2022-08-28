@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        // Création de la table pairs pour stocker les paires de devises
         Schema::create('pairs', function (Blueprint $table) {
             $table->increments('id');
 
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->foreign('to_id')->references('id')->on('currencies');
             $table->decimal('rates', 12, 6);
             $table->unique(['from_id', 'to_id']);
+            // nombre de fois que la conversion sera utilisée pour chaque paire de devise
             $table->integer('nbreRequest')->nullable();
             $table->timestamps();
         });

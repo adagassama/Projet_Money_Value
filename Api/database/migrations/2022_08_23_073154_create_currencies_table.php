@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        // Création de la tables  currencies pour stocker toutes les devises
         Schema::create('currencies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();

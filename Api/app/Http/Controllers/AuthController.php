@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    // Méthode pour enregitrer un utilisateur
     public function register(Request $request){
         $request->validate([
             'name'                  => ['required'],
@@ -26,6 +27,7 @@ class AuthController extends Controller
         return response()->json(['msg' => 'Enregistré avec succès !']);
     }
 
+    // Methode permettant de faire la connexion
     public function login(Request $request)
     {
         $request->validate([
@@ -48,6 +50,7 @@ class AuthController extends Controller
             'token' => $user->createToken($request->device_name)->plainTextToken]);
     }
 
+    // Methode pour faire la déconnexion
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

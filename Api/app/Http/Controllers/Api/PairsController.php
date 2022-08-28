@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 class PairsController extends Controller
 {
+
+    // Methode permettant de tester si l'API de conversion est fonctionnelle
     public function conversion()
     {
         return response()->json([
@@ -20,6 +22,8 @@ class PairsController extends Controller
             'status'    => 200
         ], 200);
     }
+
+    // Méthode permettant de faire une  conversion de devise en fonction des paramètres qui lui seront transmis par l'utilisateur
     public function convert($curr1, $curr2, $amount, $invert = false)
     {
         $codeFrom = Currency::where('code', $curr1)->first();
@@ -49,6 +53,7 @@ class PairsController extends Controller
             if ($invert == 'true') {
                 $converted = $amount * (1/$pair->rates);
                 $req = $pair->nbreRequest + 1;
+                // Stosker le nombre requête en BD
                 DB::table('pairs')
                     ->where('id', $pair->id)
                     ->update(['nbreRequest' => $req]);
@@ -63,6 +68,7 @@ class PairsController extends Controller
             } else {
                 $converted = $amount * $pair->rates;
                 $req = $pair->nbreRequest + 1;
+                // Stosker le nombre requête en BD
                 DB::table('pairs')
                     ->where('id', $pair->id)
                     ->update(['nbreRequest' => $req]);
@@ -94,6 +100,8 @@ class PairsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     // Récupération de toutes les paires de devises.
     public function index()
     {
         $pairs = Pairs::with('from', 'to')->latest()->get();
@@ -120,7 +128,8 @@ class PairsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // Ajout d'une paire de devise
+     public function store(Request $request)
     {
         $request->validate([
             'from_id'       => ['required'],
@@ -147,6 +156,7 @@ class PairsController extends Controller
      * @param  \App\Models\Pairs  $pairs
      * @return \Illuminate\Http\Response
      */
+    // Récupération d'une paire de devise en fonction de son id
     public function show(Request $request, $id)
     {
         $pair = Pairs::find($id);
@@ -171,6 +181,7 @@ class PairsController extends Controller
      * @param  \App\Models\Pairs  $pairs
      * @return \Illuminate\Http\Response
      */
+    // Modification d'une paire de devise
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -200,6 +211,7 @@ class PairsController extends Controller
      * @param  \App\Models\Pairs  $pairs
      * @return \Illuminate\Http\Response
      */
+    // Suppression d'une paire de devise
     public function destroy($id)
     {
         $pairs = Pairs::find($id);
